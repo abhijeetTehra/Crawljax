@@ -43,6 +43,14 @@ public class CrawlActionsBuilder {
         return crawlTag;
     }
 
+    public CrawlElement hover(String tagName) {
+        checkNotRead();
+        Preconditions.checkNotNull(tagName, "Tag name cannot be null");
+        CrawlElement crawlTag = new CrawlElement(EventType.hover, tagName.toUpperCase());
+        crawlElements.add(crawlTag);
+        return crawlTag;
+    }
+
     /**
      * Set of HTML elements Crawljax will click during crawling For example 1) &lt;a.../&gt; 2)
      * &lt;div/&gt; click("a") will only include 1 This set can be restricted by
@@ -58,15 +66,43 @@ public class CrawlActionsBuilder {
     }
 
     /**
+     * Set of HTML elements Crawljax will click during crawling For example 1) &lt;a.../&gt; 2)
+     * &lt;div/&gt; click("a") will only include 1 This set can be restricted by
+     * {@link #dontClick(String)}. If no clicks are specified, {@link #hoverDefaultElements()} is
+     * enabled.
+     *
+     * @param tagNames the tag name of the elements to be included
+     */
+    public void hover(String... tagNames) {
+        for (String tagName : tagNames) {
+            hover(tagName);
+        }
+    }
+
+    /**
      * Includes HTML elements with Tags - Anchor, Button, Input.Submit, Input.Button Specifies that
      * Crawljax should click all the default clickable elements. These include: All anchor tags All
      * buttons
      */
     public void clickDefaultElements() {
-        click("a");
-        click("button");
-        click("input").withAttribute("type", "submit");
-        click("input").withAttribute("type", "button");
+        // click("a");
+        // click("button");
+        // click("input").withAttribute("type", "submit");
+        // click("input").withAttribute("type", "button");
+        click("*");
+    }
+
+    /**
+     * Includes HTML elements with Tags - Anchor, Button, Input.Submit, Input.Button Specifies that
+     * Crawljax should click all the default clickable elements. These include: All anchor tags All
+     * buttons
+     */
+    public void hoverDefaultElements() {
+        // click("a");
+        // click("button");
+        // click("input").withAttribute("type", "submit");
+        // click("input").withAttribute("type", "button");
+        hover("*");
     }
 
     /**
@@ -76,6 +112,15 @@ public class CrawlActionsBuilder {
     public void clickElementsWithClickEventHandler() {
         clickDefaultElements();
         click(CrawlElement.CLICKABLE_ELEMENT_TAG);
+    }
+
+    /**
+     * Adds all HTML elements with a "click" event handler. Includes all default elements. see
+     * {@link #hoverDefaultElements()}
+     */
+    public void hoverElementsWithHoverEventHandler() {
+        hoverDefaultElements();
+        // hover(CrawlElement.CLICKABLE_ELEMENT_TAG);
     }
 
     private void checkNotRead() {

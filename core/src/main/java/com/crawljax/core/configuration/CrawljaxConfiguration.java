@@ -150,13 +150,13 @@ public class CrawljaxConfiguration {
         if (pluginOutput != null) {
             return pluginOutput;
         }
-
+        
         // Find a unique folder name
         int i = 0;
         do {
             pluginOutput =
                     new File(output.getAbsolutePath() + File.separator + url.getHost() + File.separator + "crawl" + i);
-            i++;
+            emptyFolder(pluginOutput);
         } while (pluginOutput.exists());
 
         // Create the folder
@@ -167,6 +167,17 @@ public class CrawljaxConfiguration {
         }
 
         return pluginOutput;
+    }
+    private void emptyFolder(File folder) {
+        File[] files = folder.listFiles();
+        if (files != null) {
+            for (File file : files) {
+                if (file.isDirectory()) {
+                    emptyFolder(file);
+                }
+                file.delete();
+            }
+        }
     }
 
     public StateVertexFactory getStateVertexFactory() {
