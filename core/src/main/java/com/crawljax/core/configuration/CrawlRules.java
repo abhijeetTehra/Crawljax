@@ -3,6 +3,7 @@ package com.crawljax.core.configuration;
 import static com.google.common.base.Preconditions.checkArgument;
 
 import com.crawljax.clickabledetection.ClickableDetectorPlugin;
+import com.crawljax.hoverdetection.HoverDetectorPlugin;
 import com.crawljax.condition.Condition;
 import com.crawljax.condition.browserwaiter.WaitCondition;
 import com.crawljax.condition.crawlcondition.CrawlCondition;
@@ -551,6 +552,10 @@ public class CrawlRules {
             return crawlActionsBuilder.enter(tagName);
         }
 
+        public CrawlElement hover(String tagName) {
+            return crawlActionsBuilder.hover(tagName);
+        }
+
         /**
          * @param tagNames
          * @return
@@ -577,6 +582,16 @@ public class CrawlRules {
         public CrawlRulesBuilder clickElementsWithClickEventHandler() {
             crawlActionsBuilder.clickElementsWithClickEventHandler();
             this.crawljaxBuilder.addPlugin(new ClickableDetectorPlugin());
+            return this;
+        }
+
+        /**
+         * @return
+         * @see CrawlActionsBuilder#hoverElementsWithHoverEventHandler()
+         */
+        public CrawlRulesBuilder hoverElementsWithHoverEventHandler() {
+            crawlActionsBuilder.hoverElementsWithHoverEventHandler();
+            this.crawljaxBuilder.addPlugin(new HoverDetectorPlugin());
             return this;
         }
 

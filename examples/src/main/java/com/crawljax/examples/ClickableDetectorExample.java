@@ -4,7 +4,6 @@ import com.crawljax.browser.EmbeddedBrowser;
 import com.crawljax.core.CrawljaxRunner;
 import com.crawljax.core.configuration.BrowserConfiguration;
 import com.crawljax.core.configuration.BrowserOptions;
-import com.crawljax.core.configuration.CrawlRules;
 import com.crawljax.core.configuration.CrawljaxConfiguration;
 import com.crawljax.plugins.crawloverview.CrawlOverview;
 import com.crawljax.plugins.testcasegenerator.TestConfiguration;
@@ -18,14 +17,14 @@ public class ClickableDetectorExample {
 
     public static void main(String[] args) {
 
-        String appURL = "http://dictionary.com";
+        String appURL = args[0];
 
         // Pixel density for your screen can be found by using
         // the command "devicePixelRatio" in Chrome browser console.
         // int pixelDensity = BrowserOptions.MACBOOK_PRO_RETINA_PIXEL_DENSITY;
 
         CrawljaxConfiguration.CrawljaxConfigurationBuilder builder = CrawljaxConfiguration.builderFor(appURL);
-        builder.crawlRules().setFormFillMode(CrawlRules.FormFillMode.RANDOM);
+        // builder.crawlRules().setFormFillMode(CrawlRules.FormFillMode.RANDOM);
         builder.setUnlimitedCrawlDepth();
         builder.setMaximumRunTime(10, TimeUnit.MINUTES);
         builder.crawlRules().clickElementsInRandomOrder(false);
@@ -36,6 +35,7 @@ public class ClickableDetectorExample {
 
         // configuration to activate clickable detection
         builder.crawlRules().clickElementsWithClickEventHandler();
+        // builder.crawlRules().hoverElementsWithHoverEventHandler();
 
         // browserOptions.setPixelDensity(pixelDensity);
         // BrowserOptions.USE_CDP should be set to true

@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>com.crawljax</groupId>
 		<artifactId>crawljax-parent-pom</artifactId>
-		<version>5.2.4-SNAPSHOT</version>
+		<version>5.2.3</version>
 	</parent>
 	<artifactId>crawljax-examples</artifactId>
 	<name>Crawljax Examples</name>
@@ -24,30 +24,71 @@
 			<artifactId>testcasegenerator</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.crawljax/crawljax-core -->
+		<dependency>
+			<groupId>com.crawljax</groupId>
+			<artifactId>crawljax-core</artifactId>
+			<version>5.2.3</version>
+		</dependency>
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
-			<version>7.8.0</version>
+			<version>7.7.1</version>
+		</dependency>
+		<dependency>
+      		<groupId>org.seleniumhq.selenium</groupId>
+      		<artifactId>selenium-chrome-driver</artifactId>
+      		<version>${selenium.version}</version>
+    	</dependency>
+		<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-devtools-v114 -->
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-devtools-v114</artifactId>
+			<version>4.10.0</version>
+		</dependency>
+
+
+		<!-- <dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>${last.version}</version>
+		</dependency> -->
+<!-- end excluding "guava" from webdrivermanager: -->
+		<dependency>
+			<groupId>io.github.bonigarcia</groupId>
+			<artifactId>webdrivermanager</artifactId>
+			<version>5.3.1</version>
+			<exclusions>
+				<exclusion>
+					<groupId>com.google.guava</groupId>
+					<artifactId>guava</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
 			<version>2.10.1</version>
 		</dependency>
+		<!-- <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>5.3.2</version>
+        </dependency> -->
 	</dependencies>
 
 	<build>
 		<plugins>
 			<plugin>
-				<!-- <groupId>org.apache.maven.plugins</groupId>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
 				<configuration>
 					<archive>
 						<manifest>
-							<addClasspath>true</addClasspath>
-							<classpathPrefix>libs/</classpathPrefix>
+							<!-- <addClasspath>true</addClasspath>
+							<classpathPrefix>libs/</classpathPrefix> -->
 							<mainClass>
-								com.crawljax.examples.VisualCrawlExample
+								com.crawljax.examples.ClickableDetectorExample
 							</mainClass>
 						</manifest>
 					</archive>
@@ -70,7 +111,38 @@
 						</configuration>
 					</execution>
 				</executions>
+			</plugin>
+			<!-- <plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
 			</plugin> -->
+			<!-- <plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifest>
+							<mainClass>com.gaian.catcher.app.CatcherRunner</mainClass>
+						</manifest>
+					</archive>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin> -->
+			<plugin>
 			    <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <version>2.4.1</version>
@@ -80,13 +152,13 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>com.crawljax.examples.FragCrawlExample</mainClass>
+                            <mainClass>com.crawljax.examples.ClickableDetectorExample</mainClass>
                         </manifest>
                     </archive>
 
                 </configuration>
                 <!--enable if you want to build a jar with all dependencies -->
-								<!--
+								
                 <executions>
                     <execution>
                         <id>make-assembly</id>
@@ -96,7 +168,7 @@
                         </goals>
                     </execution>
                 </executions>
-                -->
+               
             </plugin>
 			
 		</plugins>
