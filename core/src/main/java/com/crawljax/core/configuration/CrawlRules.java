@@ -3,7 +3,6 @@ package com.crawljax.core.configuration;
 import static com.google.common.base.Preconditions.checkArgument;
 
 import com.crawljax.clickabledetection.ClickableDetectorPlugin;
-import com.crawljax.hoverdetection.HoverDetectorPlugin;
 import com.crawljax.condition.Condition;
 import com.crawljax.condition.browserwaiter.WaitCondition;
 import com.crawljax.condition.crawlcondition.CrawlCondition;
@@ -13,6 +12,7 @@ import com.crawljax.core.configuration.CrawljaxConfiguration.CrawljaxConfigurati
 import com.crawljax.core.configuration.PreCrawlConfiguration.PreCrawlConfigurationBuilder;
 import com.crawljax.core.state.Eventable.EventType;
 import com.crawljax.fragmentation.FragmentRules;
+import com.crawljax.hoverdetection.HoverDetectorPlugin;
 import com.crawljax.oraclecomparator.OracleComparator;
 import com.crawljax.oraclecomparator.comparators.DummyComparator;
 import com.google.common.base.MoreObjects;
@@ -548,12 +548,16 @@ public class CrawlRules {
             return crawlActionsBuilder.click(tagName);
         }
 
-        public CrawlElement enter(String tagName) {
-            return crawlActionsBuilder.enter(tagName);
-        }
-
+        /**
+         * @param tagName
+         * @see com.crawljax.core.configuration.CrawlActionsBuilder#click(java.lang.String)
+         */
         public CrawlElement hover(String tagName) {
             return crawlActionsBuilder.hover(tagName);
+        }
+
+        public CrawlElement enter(String tagName) {
+            return crawlActionsBuilder.enter(tagName);
         }
 
         /**
@@ -566,12 +570,32 @@ public class CrawlRules {
             return this;
         }
 
+
+        /**
+         * @param tagNames
+         * @return
+         * @see com.crawljax.core.configuration.CrawlActionsBuilder#hover(java.lang.String[])
+         */
+        public CrawlRulesBuilder hover(String... tagNames) {
+            crawlActionsBuilder.hover(tagNames);
+            return this;
+        }
+
         /**
          * @return
          * @see com.crawljax.core.configuration.CrawlActionsBuilder#clickDefaultElements()
          */
         public CrawlRulesBuilder clickDefaultElements() {
             crawlActionsBuilder.clickDefaultElements();
+            return this;
+        }
+
+        /**
+         * @return
+         * @see com.crawljax.core.configuration.CrawlActionsBuilder#hoverDefaultElements()
+         */
+        public CrawlRulesBuilder hoverDefaultElements() {
+            crawlActionsBuilder.hoverDefaultElements();
             return this;
         }
 
@@ -587,7 +611,7 @@ public class CrawlRules {
 
         /**
          * @return
-         * @see CrawlActionsBuilder#hoverElementsWithHoverEventHandler()
+         * @see CrawlActionsBuilder#clickElementsWithClickEventHandler()
          */
         public CrawlRulesBuilder hoverElementsWithHoverEventHandler() {
             crawlActionsBuilder.hoverElementsWithHoverEventHandler();

@@ -43,6 +43,10 @@ public class CrawlActionsBuilder {
         return crawlTag;
     }
 
+    /**
+     * @param tagName the tag name of the elements to be included
+     * @return this CrawlElement
+     */
     public CrawlElement hover(String tagName) {
         checkNotRead();
         Preconditions.checkNotNull(tagName, "Tag name cannot be null");
@@ -66,9 +70,7 @@ public class CrawlActionsBuilder {
     }
 
     /**
-     * Set of HTML elements Crawljax will click during crawling For example 1) &lt;a.../&gt; 2)
-     * &lt;div/&gt; click("a") will only include 1 This set can be restricted by
-     * {@link #dontClick(String)}. If no clicks are specified, {@link #hoverDefaultElements()} is
+     * If no clicks are specified, {@link #hoverDefaultElements()} is
      * enabled.
      *
      * @param tagNames the tag name of the elements to be included
@@ -98,10 +100,10 @@ public class CrawlActionsBuilder {
      * buttons
      */
     public void hoverDefaultElements() {
-        // click("a");
-        // click("button");
-        // click("input").withAttribute("type", "submit");
-        // click("input").withAttribute("type", "button");
+        // hover("a");
+        // hover("button");
+        // hover("input").withAttribute("type", "submit");
+        // hover("input").withAttribute("type", "button");
         hover("*");
     }
 
@@ -115,12 +117,12 @@ public class CrawlActionsBuilder {
     }
 
     /**
-     * Adds all HTML elements with a "click" event handler. Includes all default elements. see
+     * Adds all HTML elements with a "hover" event handler. Includes all default elements. see
      * {@link #hoverDefaultElements()}
      */
     public void hoverElementsWithHoverEventHandler() {
         hoverDefaultElements();
-        // hover(CrawlElement.CLICKABLE_ELEMENT_TAG);
+        hover(CrawlElement.HOVERABLE_ELEMENT_TAG);
     }
 
     private void checkNotRead() {

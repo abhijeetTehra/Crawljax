@@ -28,7 +28,7 @@
         <slf4j.version>2.0.7</slf4j.version>
         <logback.version>1.4.7</logback.version>
         <selenium.version>4.9.0</selenium.version>
-        <selenium-devtools.version>selenium-devtools-v114</selenium-devtools.version>
+        <selenium-devtools.version>selenium-devtools-v112</selenium-devtools.version>
         <jetty.version>11.0.15</jetty.version>
         <guice.version>5.1.0</guice.version>
         <junit.version>4.13.2</junit.version>
@@ -399,34 +399,6 @@
                             <additionalJOptions>--allow-script-in-comments</additionalJOptions>
                         </configuration>
                     </plugin>
-                    <plugin>
-			    <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <version>2.4.1</version>
-                <configuration>
-                    <descriptorRefs>
-                        <descriptorRef>jar-with-dependencies</descriptorRef>
-                    </descriptorRefs>
-                    <archive>
-                        <manifest>
-                            <mainClass>com.crawljax.examples.ClickableDetectorExample</mainClass>
-                        </manifest>
-                    </archive>
-
-                </configuration>
-                <!--enable if you want to build a jar with all dependencies -->
-								
-                <executions>
-                    <execution>
-                        <id>make-assembly</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
-                    </execution>
-                </executions>
-               
-            </plugin>
                 </plugins>
             </build>
         </profile>
