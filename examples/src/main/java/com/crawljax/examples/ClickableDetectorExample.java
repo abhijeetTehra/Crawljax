@@ -17,8 +17,9 @@ public class ClickableDetectorExample {
 
     public static void main(String[] args) {
 
-        String appURL = args[0];
+        // String appURL = "http://wavecities.com";
 
+        String appURL = args[0];
         // Pixel density for your screen can be found by using
         // the command "devicePixelRatio" in Chrome browser console.
         // int pixelDensity = BrowserOptions.MACBOOK_PRO_RETINA_PIXEL_DENSITY;
@@ -34,9 +35,11 @@ public class ClickableDetectorExample {
         builder.crawlRules().waitAfterEvent(WAIT_TIME_AFTER_EVENT, TimeUnit.MILLISECONDS);
 
         // configuration to activate clickable detection
-        builder.crawlRules().clickElementsWithClickEventHandler();
-        // builder.crawlRules().hoverElementsWithHoverEventHandler();
-
+        if (args[1] == "click") {
+            builder.crawlRules().clickElementsWithClickEventHandler();
+        } else {
+            builder.crawlRules().hoverElementsWithHoverEventHandler();
+        }
         // browserOptions.setPixelDensity(pixelDensity);
         // BrowserOptions.USE_CDP should be set to true
 

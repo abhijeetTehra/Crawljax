@@ -32,6 +32,7 @@ import java.util.List;
 public final class CrawlElement {
 
     public static final String CLICKABLE_ELEMENT_TAG = "clickable";
+    public static final String HOVERABLE_ELEMENT_TAG = "hoverable";
     private final String tagName;
     private final List<Condition> conditions = Lists.newLinkedList();
     private final String id;

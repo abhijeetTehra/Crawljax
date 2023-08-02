@@ -339,6 +339,15 @@ public final class WebDriverBackedEmbeddedBrowser implements EmbeddedBrowser {
                 }
                 break;
             case hover:
+                try {
+                    // webElement.;
+                } catch (ElementNotInteractableException e) {
+                    throw e;
+                } catch (WebDriverException e) {
+                    throwIfConnectionException(e);
+                    throwIfNotInteractableException(e);
+                    return false;
+                }
                 LOGGER.info("EventType hover called but this isn't implemented yet");
                 break;
             default:
